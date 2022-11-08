@@ -1,0 +1,328 @@
+/** 
+  * Image Credits
+  * Running Pikachu Sprite GIF: https://media.tenor.com/fSsxftCb8w0AAAAi/pikachu-running.gif
+  * Standing Pikachu Sprite GIF: https://img.pokemondb.net/sprites/black-white/anim/normal/pikachu.gif
+  */
+
+@import url("https://fonts.googleapis.com/css?family=Modak");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:wght@900");
+
+:root {
+  --header-height: 130px;
+}
+
+/* ************ */
+/* Key Elements */
+/* ************ */
+
+/* Animation that is applied to the body has a 'forwards' animation fill-mode */
+/* This ensures that the page remains 'rotated' even after the animation ends */
+body {
+  background-color: #202124;
+  animation: attacked linear 5s forwards;
+  height: 100vh;
+}
+
+/* Although this element moves inwards from outside the page, it must be absolutely positioned where the animation would end */
+#pikachu {
+  position: absolute;
+  top: calc(var(--header-height) - 100px);
+  right: 20%;
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  animation: pikaRunning linear 5s;
+}
+
+/* These elements are the 'pika' texts that are apositioned relative to the pikachu image */
+#pikachu::before {
+  content: "PIKA";
+  font-size: 25px;
+  color: rgb(228, 228, 50);
+  position: absolute;
+  top: -1rem;
+  left: 4rem;
+  rotate: 30deg;
+  font-family: "Modak", sans-serif;
+  animation: pikaSound1 linear 5s;
+  opacity: 0;
+}
+
+#pikachu::after {
+  content: "PIKA";
+  font-size: 50px;
+  color: rgb(228, 228, 50);
+  position: absolute;
+  top: -1rem;
+  left: -7rem;
+  rotate: -20deg;
+  font-family: "Modak", sans-serif;
+  animation: pikaSound2 linear 5s;
+  opacity: 0;
+}
+
+#flash {
+  height: 1rem;
+  aspect-ratio: 1/1;
+  background: radial-gradient(rgb(255, 255, 0), transparent);
+  position: absolute;
+  top: calc(var(--header-height) - 100px);
+  right: 23%;
+  opacity: 0;
+  border-radius: 100%;
+  animation: flash linear 5s;
+}
+
+/* ********** */
+/* Animations */
+/* ********** */
+
+/* Animation used for pikachu to run across the screen */
+/* The Running Pika image first starts off from outside of the screen and moves in, before changing into a Standing Pika image*/
+/* Applied to #pikachu */
+@keyframes pikaRunning {
+  0% {
+    translate: -100vw;
+    background-image: url(https://media.tenor.com/fSsxftCb8w0AAAAi/pikachu-running.gif);
+    width: 150px;
+    height: 100px;
+    opacity: 1;
+  }
+  49% {
+    translate: 0;
+    background-image: url(https://media.tenor.com/fSsxftCb8w0AAAAi/pikachu-running.gif);
+    width: 150px;
+    height: 100px;
+  }
+  50% {
+    background-image: url(https://img.pokemondb.net/sprites/black-white/anim/normal/pikachu.gif);
+    height: 100px;
+    width: 100px;
+  }
+  75% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+}
+
+/* Animations pikaSound# used for the pika sounds */
+/* Pika sounds are staggered and appear one after another */
+/* Applied to #pikachu::before and #pikachu::after */
+@keyframes pikaSound1 {
+  60% {
+    opacity: 0;
+  }
+  65% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0;
+  }
+}
+@keyframes pikaSound2 {
+  70% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+}
+
+/* Animation used for the 'flash' effect */
+/* It is simply an expanding circular yellow div*/
+/* Applied to #flash */
+@keyframes flash {
+  80% {
+    scale: 1;
+    opacity: 0;
+  }
+  81% {
+    scale: 10;
+    opacity: 1;
+  }
+  85% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 0;
+  }
+  100% {
+    scale: 100;
+    opacity: 1;
+  }
+}
+
+/* Animation used to make the HTML body shake back and forth */
+/* Applied to body */
+
+@keyframes attacked {
+  78% {
+    rotate: 0deg;
+  }
+  79% {
+    opacity: 1;
+    rotate: -2deg;
+  }
+  80% {
+    opacity: 0.5;
+    rotate: 3deg;
+  }
+  81% {
+    opacity: 1;
+    rotate: -3deg;
+  }
+  85% {
+    opacity: 0.5;
+    rotate: 4deg;
+  }
+  90% {
+    opacity: 1;
+    rotate: -4deg;
+  }
+  95% {
+    opacity: 0.5;
+    rotate: 5deg;
+  }
+  100% {
+    opacity: 1;
+    rotate: -5deg;
+  }
+}
+
+/* ************** */
+/* Other elements */
+/* ************** */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*:focus {
+  outline: none;
+}
+
+header {
+  height: var(--header-height);
+  color: white;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  padding: 2rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: small;
+  border-bottom: rgb(70, 70, 70) solid 1px;
+  box-sizing: border-box;
+}
+
+input {
+  color: white;
+  font-weight: 300;
+  font-size: medium;
+  width: 500px;
+  height: 15px;
+  padding: 1rem;
+  padding-left: 1.5rem;
+  border-radius: 50px;
+  background-color: #363636;
+  border: none;
+}
+
+input:hover {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
+    0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
+    0 16px 16px rgba(0, 0, 0, 0.12);
+}
+
+main {
+  padding: 0 5rem 0 5rem;
+  padding-top: 0;
+  font-family: sans-serif;
+}
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  color: white;
+  width: 700px;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.page > h1 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 30px;
+}
+
+.page > a {
+  font-family: sans-serif;
+  font-size: small;
+  color: #8ab4f8;
+  text-decoration: none;
+}
+
+.current > a {
+  color: #9aa0a6;
+}
+
+.hidden > a {
+  visibility: hidden;
+}
+
+.next > a:first-child {
+  font-size: 30px;
+}
+
+.next {
+  padding-left: 0.5rem;
+}
+
+.results {
+  width: 300px;
+  display: flex;
+  padding: 1rem 0 1rem 0;
+  color: #9aa0a6;
+  font-size: 0.9rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2rem;
+  width: 700px;
+}
+
+.contentCard {
+  font-size: 0.9rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  color: #bdc1c6;
+}
+
+.contentCard > a {
+  font-size: 1.25rem;
+  text-decoration: none;
+  color: #8ab4f8;
+}
+
+.contentCard > a:hover {
+  text-decoration: underline;
+}
